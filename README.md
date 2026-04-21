@@ -1,79 +1,104 @@
-# Práctica Ionic + Angular
+# Evaluación Ionic - Programación III
 
-## Objetivo General
-Desarrollar una aplicación móvil basada en Ionic Framework y Angular que implemente un menú lateral (Side Menu) funcional con tres opciones de navegación ("Inicio", "Información personal" y "Contacto"), aplicando el patrón de diseño Lazy Loading (Carga Perezosa) mediante la arquitectura moderna de Standalone Components.
+## Información del Proyecto y Desarrollador
+
+Este proyecto es una evaluación práctica de desarrollo móvil y web utilizando Ionic Framework y Angular.
+
+**Datos del Estudiante:**
+- **Universidad:** UNETI
+- **Nombre:** Diossmer Villamizar
+- **Identificación / Cédula:** 21310567
+- **Materia:** PROGRAMACIÓN III MÓDULO II 6Y7
 
 ---
 
-## Flujo de Construcción (Paso a Paso)
+## Versiones Utilizadas
 
-### Paso 1: Creación del Proyecto Base
-Se inicializó el proyecto utilizando la interfaz de línea de comandos (CLI) de Ionic, seleccionando la plantilla `sidemenu` para tener la estructura del menú lateral preconfigurada.
-* **Comando ejecutado:** `ionic start evaluacionIonic sidemenu --type=angular`
+El proyecto fue construido utilizando herramientas modernas de desarrollo Frontend:
+- **Angular:** Versión 20 (`^20.0.0`)
+- **Ionic Framework:** Versión 8 (`@ionic/angular: ^8.0.0`)
+- **Capacitor:** Versión 8 (`^8.3.1`)
 
-### Paso 2: Generación de las Vistas (Páginas)
-Se generaron las tres pantallas solicitadas en la evaluación. Al usar la CLI, Ionic crea automáticamente los archivos estructurales (.html, .scss, .page.ts) para cada vista.
-* **Comandos ejecutados:** * `ionic g page pages/inicio`
-  * `ionic g page pages/informacion-personal`
-  * `ionic g page pages/contacto`
+---
 
-### Paso 3: Migración de Rutas (Implementación de Lazy Loading)
-Dado que las versiones recientes de Angular utilizan Standalone Components (eliminando la necesidad de archivos `.module.ts`), se reestructuró el archivo principal de rutas.
-* **Archivo modificado:** `src/app/app.routes.ts`
-* **Acción:** Se eliminaron las rutas generadas por defecto y se configuró un arreglo `routes` exportable. Se utilizó la función `loadComponent` apuntando directamente a los archivos `.page.ts` para garantizar que cada vista solo se cargue en la memoria del dispositivo cuando el usuario haga clic en ella.
+## ¿Por qué usamos Standalone Components?
 
-### Paso 4: Configuración del Menú Lateral (TypeScript)
-Se adaptó el controlador principal de la aplicación para registrar las nuevas rutas y los íconos del menú.
-* **Archivo modificado:** `src/app/app.component.ts`
-* **Acciones:**
-  1. Se importaron explícitamente todos los módulos de interfaz de Ionic (`IonApp`, `IonMenu`, `IonItem`, etc.) en la directiva `imports` del componente Standalone, solucionando los errores de compilación (`NG8001`).
-  2. Se actualizó el arreglo `appPages` con los títulos ('Inicio', 'Información personal', 'Contacto'), sus respectivas URLs y los nombres de los íconos.
-  3. Se importaron y registraron manualmente los íconos vectoriales mediante `addIcons()` en el constructor para optimizar el peso final de la aplicación.
+A partir de Angular 14 (y recomendado fuertemente en versiones recientes como Angular 20), el marco de trabajo introdujo los **Standalone Components**. En este proyecto se utilizan por las siguientes razones:
 
-### Paso 5: Construcción de la Interfaz del Menú (HTML)
-Se limpió la plantilla visual generada por el framework para que coincidiera exactamente con los requerimientos visuales del docente.
-* **Archivo modificado:** `src/app/app.component.html`
-* **Acciones:** Se eliminaron las secciones extra (como la lista de "Labels") y se configuró un ciclo `@for` que itera sobre el arreglo `appPages` para imprimir dinámicamente cada botón del menú (`<ion-item>`) junto con su ícono (`<ion-icon>`) y etiqueta (`<ion-label>`).
+1. **Simplicidad:** Eliminan la necesidad de declarar componentes, directivas y pipes en archivos `NgModules` (`app.module.ts` o módulos compartidos).
+2. **Modularidad:** Cada componente gestiona sus propias importaciones en la propiedad `imports` de su decorador `@Component`. Esto hace que los componentes sean verdaderamente independientes y fáciles de reutilizar.
+3. **Rendimiento (Tree Shaking):** Al importar solo lo que el componente necesita de forma directa, el compilador puede optimizar mejor el código final eliminando el código no utilizado.
+4. **Curva de aprendizaje:** Reduce la cantidad de conceptos arquitectónicos que un desarrollador debe aprender para empezar a construir aplicaciones.
 
-### Paso 6: Documentación del Código Fuente (Fase Final)
-Para cumplir con los criterios de evaluación (8 puntos de la rúbrica), se procedió a comentar manualmente la lógica de negocio y la estructura HTML en todos los archivos modificados, utilizando terminología propia para demostrar dominio sobre el framework.
+---
 
+## Flujo de Instalación
 
-## Estructura de Directorios del Proyecto
+Para ejecutar este proyecto en tu entorno local, sigue los pasos a continuación:
 
-La aplicación sigue el estándar de organización de Ionic Framework basado en Angular. A continuación, se detalla la estructura principal dentro de la carpeta `src/` (código fuente), que es donde reside toda la lógica de negocio y presentación de nuestra evaluación:
+1. **Clonar o descargar el repositorio:**
+   ```bash
+   git clone <url-del-repositorio>
+   cd evaluacionIonic
+   ```
 
-```text
-evaluacionIonic/
-├── src/
-│   ├── app/                        # Directorio principal de la aplicación
-│   │   ├── pages/                  # Vistas o pantallas generadas
-│   │   │   ├── contacto/           # Carpeta de la vista "Contacto"
-│   │   │   │   ├── contacto.page.html   # Estructura visual (Formulario, botones)
-│   │   │   │   ├── contacto.page.scss   # Estilos CSS específicos de esta página
-│   │   │   │   └── contacto.page.ts     # Controlador lógico (TypeScript)
-│   │   │   ├── informacion-personal/
-│   │   │   └── inicio/             
-│   │   │
-│   │   ├── app.component.html      # Plantilla principal (Aquí reside el Menú Lateral / Side Menu)
-│   │   ├── app.component.ts        # Controlador principal (Configuración de ítems del menú y registro de íconos)
-│   │   └── app.routes.ts           # Archivo de enrutamiento (Implementación de Lazy Loading)
-│   │
-│   ├── assets/                     # Directorio para recursos estáticos (imágenes, logos, fuentes locales)
-│   ├── theme/                      
-│   │   └── variables.scss          # Variables CSS globales (colores primarios, secundarios, modo oscuro)
-│   ├── global.scss                 # Estilos globales que aplican a toda la aplicación
-│   └── main.ts                     # Archivo de arranque (Bootstrap) de la aplicación
-│
-├── angular.json                    # Archivo de configuración del compilador de Angular
-├── ionic.config.json               # Archivo de configuración de Ionic CLI
-└── package.json                    # Dependencias del proyecto (librerías instaladas vía npm)
-```
+2. **Instalar dependencias:**
+   Asegúrate de tener [Node.js](https://nodejs.org/) instalado.
+   ```bash
+   npm install
+   ```
 
-### Descripción de los Componentes Clave:
+3. **Ejecutar en modo desarrollo:**
+   Para levantar un servidor de prueba y visualizar la app en el navegador:
+   ```bash
+   ionic serve
+   ```
 
-* La carpeta `pages/`: Contiene los módulos independientes de nuestra interfaz. Ionic separa inteligentemente la estructura (.html), el diseño (.scss) y el comportamiento (.ts) para mantener un código escalable y ordenado.
+---
 
-* `app.component (HTML y TS)`: Actúa como el "esqueleto" de la aplicación. Al utilizar la plantilla sidemenu, este componente alberga el <ion-menu> que envuelve y controla el acceso al resto de las páginas.
+## Flujo de Comando
 
-* `app.routes.ts`: Es el "mapa" de la aplicación. Gracias a la directiva loadComponent, este archivo gestiona la carga perezosa (Lazy Loading), asegurando que la aplicación no descargue el código de la vista "Contacto" si el usuario solo está navegando en la vista "Inicio". Esto optimiza drásticamente el rendimiento de la memoria.
+El desarrollo con Ionic y Angular se basa en la CLI (Interfaz de Línea de Comandos). A continuación el flujo general utilizado durante la creación de este proyecto:
+
+1. **Creación del proyecto:**
+   ```bash
+   ionic start evaluacionIonic blank --type=angular --standalone
+   ```
+2. **Generación de Páginas:**
+   ```bash
+   ionic g page pages/inicio
+   ionic g page pages/contacto
+   ionic g page pages/informacion-personal
+   ```
+3. **Ejecución y pruebas:**
+   ```bash
+   ionic serve
+   ```
+4. **Construcción para producción (Opcional):**
+   ```bash
+   ionic build
+   ```
+
+---
+
+## Flujo de la Aplicación
+
+La aplicación cuenta con una navegación mediante un menú lateral (Sidebar / Menú Hamburguesa) que permite al usuario desplazarse por tres vistas principales:
+
+1. **Inicio:** Es la página de bienvenida donde se introduce al usuario al propósito de la evaluación.
+2. **Información Personal (Mi Perfil):** Presenta una biografía del desarrollador (Diossmer Villamizar), destacando habilidades técnicas (Fullstack Angular + Ionic, MongoDB, PostgreSQL) y los datos académicos pertinentes de la UNETI.
+3. **Contacto:** Contiene un formulario interactivo que simula el envío de un mensaje. Incluye captura de datos mediante `[(ngModel)]`, un selector de prioridad del mensaje (usando `<ion-range>`) y lógica para visualizar los datos capturados dinámicamente (`<ion-card>` con directiva `*ngIf`).
+
+---
+
+## Flujo de Código dentro del Proyecto (Arquitectura)
+
+Al basarse en componentes Standalone, el flujo del código es directo y centrado en componentes:
+
+- **`src/main.ts`**: Es el punto de entrada principal. Configura los proveedores básicos e inicia la aplicación utilizando `bootstrapApplication`.
+- **`src/app/app.component.ts`**: El componente raíz de la aplicación. Aquí es donde suele encontrarse la estructura del menú de navegación (`<ion-menu>`) y el enrutador (`<ion-router-outlet>`).
+- **`src/app/app.routes.ts`**: Archivo dedicado al enrutamiento. Define qué componente Standalone cargar en base a la URL ingresada. Soporta *Lazy Loading* (Carga diferida) mediante el uso de `loadComponent`.
+- **`src/app/pages/`**: Contiene los componentes de las páginas creadas (`inicio`, `contacto`, `informacion-personal`). Cada página encapsula:
+  - **`.html`**: La vista y la maquetación de Ionic.
+  - **`.ts`**: La lógica del negocio, las variables de estado y la gestión de importaciones individuales (ej. `IonInput`, `IonButton`, `FormsModule`).
+  - **`.scss`**: Estilos específicos del componente.
