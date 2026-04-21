@@ -1,0 +1,7 @@
+{
+  "name": "evaluacionIonic",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
