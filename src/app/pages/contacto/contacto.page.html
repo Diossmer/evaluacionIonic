@@ -27,27 +27,33 @@
   <!-- RANGO DE PRIORIDAD -->
   <ion-item>
     <ion-label position="stacked">Nivel de Prioridad (1-5)</ion-label>
-    <ion-range [min]="1" [max]="5" [step]="1" [snaps]="true" [pin]="true" [(ngModel)]="prioridad"></ion-range>
+    <!-- El color de ion-range ahora cambia dinámicamente según el valor -->
+    <ion-range [min]="1" [max]="5" [step]="1" [snaps]="true" [pin]="true" [(ngModel)]="prioridad" [color]="getColorPrioridad(prioridad)"></ion-range>
   </ion-item>
 
   <!-- BOTÓN PARA ENVIAR (Simulado) -->
   <div class="ion-margin-top">
-    <ion-button expand="block" (click)="enviarMensaje()">
+    <ion-button expand="block" (click)="enviarMensaje()" [color]="getColorPrioridad(prioridad)">
       Enviar Mensaje
     </ion-button>
   </div>
 
-  <!-- VISUALIZACIÓN DEL MENSAJE ENVIADO -->
-  <ion-card *ngIf="datosEnviados" style="margin-top: 30px; border-left: 4px solid var(--ion-color-success);">
-    <ion-card-header>
+  <!-- VISUALIZACIÓN DEL HISTORIAL DE MENSAJES ENVIADOS -->
+  <ion-card *ngFor="let msg of mensajesEnviados" style="margin-top: 30px;">
+    <!-- Aplicamos el color de la prioridad al encabezado de la tarjeta -->
+    <ion-card-header [color]="getColorPrioridad(msg.prioridad)">
       <ion-card-title>Mensaje Recibido</ion-card-title>
     </ion-card-header>
     <ion-card-content>
-      <p><strong>De:</strong> {{ datosEnviados.nombre }}</p>
-      <p><strong>Prioridad:</strong> {{ datosEnviados.prioridad }} de 5</p>
+      <p style="margin-top: 15px;"><strong>De:</strong> {{ msg.nombre }}</p>
+      <p>
+        <strong>Prioridad:</strong> 
+        <!-- Un badge también utiliza el color dinámico -->
+        <ion-badge [color]="getColorPrioridad(msg.prioridad)">Nivel {{ msg.prioridad }}</ion-badge>
+      </p>
       <p><strong>Mensaje:</strong></p>
-      <p style="background: var(--ion-color-light); padding: 10px; border-radius: 5px; margin-top: 10px;">
-        {{ datosEnviados.mensaje }}
+      <p style="background: var(--ion-color-light); padding: 10px; border-radius: 5px; margin-top: 10px; color: var(--ion-color-dark);">
+        {{ msg.mensaje }}
       </p>
     </ion-card-content>
   </ion-card>

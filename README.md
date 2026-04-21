@@ -38,7 +38,7 @@ Para ejecutar este proyecto en tu entorno local, sigue los pasos a continuación
 
 1. **Clonar o descargar el repositorio:**
    ```bash
-   git clone <url-del-repositorio>
+   git clone https://github.com/Diossmer/evaluacionIonic.git
    cd evaluacionIonic
    ```
 
