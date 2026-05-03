@@ -9,7 +9,6 @@ import { IonContent, IonHeader, IonTitle, IonToolbar, IonButtons, IonMenuButton 
   templateUrl: './inicio.page.html',
   styleUrls: ['./inicio.page.scss'],
   standalone: true,
-  // Agregamos IonButtons e IonMenuButton para poder usar el menú lateral
   imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonButtons, IonMenuButton]
 })
 export class InicioPage implements OnInit {

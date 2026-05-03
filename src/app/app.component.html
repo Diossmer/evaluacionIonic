@@ -5,7 +5,7 @@
         <ion-list id="inbox-list">
           <ion-list-header>Mi Evaluación</ion-list-header>
           <ion-note>Ionic & Angular</ion-note>
-
+          <!-- Sidebar se muestran los links de la navegacion-->
           @for (p of appPages; track p.title) {
           <ion-menu-toggle auto-hide="false">
             <ion-item routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false"

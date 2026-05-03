@@ -1,3 +1,8 @@
+/**
+ * Pruebas unitarias para el componente InformacionPersonalPage.
+ * Se encarga de vigilar el correcto funcionamiento del componente.
+ * del archivo de informacion-personal.page.ts.
+ */
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { InformacionPersonalPage } from './informacion-personal.page';
 

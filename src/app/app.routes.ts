@@ -1,5 +1,7 @@
 import { Routes } from '@angular/router';
-
+/**
+ * Rutas principales de aplicacion del sidebar.
+ */
 export const routes: Routes = [
   {
     path: '',

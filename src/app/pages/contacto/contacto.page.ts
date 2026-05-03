@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-// IMPORTACIÓN DE COMPONENTES DE INTERFAZ:
 import { IonContent, IonHeader, IonTitle, IonToolbar, IonButtons, IonMenuButton, IonInput, IonButton, IonItem, IonRange, IonLabel, IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonBadge } from '@ionic/angular/standalone';
 
 @Component({
@@ -9,17 +8,16 @@ import { IonContent, IonHeader, IonTitle, IonToolbar, IonButtons, IonMenuButton,
   templateUrl: './contacto.page.html',
   styleUrls: ['./contacto.page.scss'],
   standalone: true,
-  // Importamos los componentes, agregando IonBadge para el color
   imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonButtons, IonMenuButton, IonInput, IonButton, IonItem, IonRange, IonLabel, IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonBadge]
 })
 export class ContactoPage implements OnInit {
 
-  // Variables para simular los datos del formulario de contacto
+  // Variables del formulario
   nombre: string = '';
   mensaje: string = '';
-  prioridad: number = 3; // Nivel de prioridad predeterminado
+  prioridad: number = 3;
 
-  // Arreglo para almacenar el historial de mensajes enviados (se borra al refrescar)
+  // Historial de mensajes
   mensajesEnviados: any[] = [];
 
   constructor() { }
@@ -30,11 +28,11 @@ export class ContactoPage implements OnInit {
   // MÉTODO PARA ASIGNAR UN COLOR DINÁMICO SEGÚN EL RANGO
   getColorPrioridad(nivel: number): string {
     switch (nivel) {
-      case 1: return 'success';   // 1 = Verde (Muy baja)
-      case 2: return 'tertiary';  // 2 = Morado/Azul (Baja)
-      case 3: return 'primary';   // 3 = Azul (Normal)
-      case 4: return 'warning';   // 4 = Amarillo (Alta)
-      case 5: return 'danger';    // 5 = Rojo (Muy alta/Urgente)
+      case 1: return 'success';
+      case 2: return 'tertiary';
+      case 3: return 'primary';
+      case 4: return 'warning';
+      case 5: return 'danger';
       default: return 'primary';
     }
   }
@@ -42,8 +40,8 @@ export class ContactoPage implements OnInit {
   // MÉTODO PARA SIMULAR EL ENVÍO DEL FORMULARIO Y MOSTRAR RESULTADO
   enviarMensaje() {
     if (this.nombre.trim() !== '' && this.mensaje.trim() !== '') {
-      
-      // Guardamos el nuevo mensaje agregándolo al inicio del arreglo
+
+      // Guarda el nuevo mensaje
       this.mensajesEnviados.unshift({
         nombre: this.nombre,
         mensaje: this.mensaje,

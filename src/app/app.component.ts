@@ -4,6 +4,11 @@ import { IonApp, IonSplitPane, IonMenu, IonContent, IonList, IonListHeader, IonN
 import { addIcons } from 'ionicons';
 import { homeOutline, homeSharp, personOutline, personSharp, mailOutline, mailSharp } from 'ionicons/icons';
 
+/**
+ * Componente Raíz de la aplicación.
+ * Se encarga de alojar el menú lateral (Sidebar) y el `<ion-router-outlet>`, que es el 
+ * espacio donde se inyectarán dinámicamente las demás páginas (Inicio, Contacto, etc).
+ */
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
