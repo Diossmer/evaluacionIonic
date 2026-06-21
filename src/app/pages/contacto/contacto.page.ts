@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonButtons, IonMenuButton, IonInput, IonButton, IonItem, IonRange, IonLabel, IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonBadge } from '@ionic/angular/standalone';
+import { IonContent, IonHeader, IonTitle, IonToolbar, IonButtons, IonMenuButton, IonInput, IonButton, IonItem, IonRange, IonLabel, IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonBadge, LoadingController, ToastController } from '@ionic/angular/standalone';
 
 @Component({
   selector: 'app-contacto',
@@ -16,11 +16,13 @@ export class ContactoPage implements OnInit {
   nombre: string = '';
   mensaje: string = '';
   prioridad: number = 3;
+  nombreError: boolean = false;
+  mensajeError: boolean = false;
 
   // Historial de mensajes
   mensajesEnviados: any[] = [];
 
-  constructor() { }
+  constructor(private loadingCtrl: LoadingController, private toastCtrl: ToastController) { }
 
   ngOnInit() {
   }
@@ -38,8 +40,18 @@ export class ContactoPage implements OnInit {
   }
 
   // MÉTODO PARA SIMULAR EL ENVÍO DEL FORMULARIO Y MOSTRAR RESULTADO
-  enviarMensaje() {
-    if (this.nombre.trim() !== '' && this.mensaje.trim() !== '') {
+  async enviarMensaje() {
+    this.nombreError = this.nombre.trim() === '';
+    this.mensajeError = this.mensaje.trim() === '';
+
+    if (!this.nombreError && !this.mensajeError) {
+      const loading = await this.loadingCtrl.create({
+        message: 'Enviando mensaje...',
+        duration: 1000
+      });
+      await loading.present();
+
+      await loading.onDidDismiss();
 
       // Guarda el nuevo mensaje
       this.mensajesEnviados.unshift({
@@ -52,8 +64,22 @@ export class ContactoPage implements OnInit {
       this.nombre = '';
       this.mensaje = '';
       this.prioridad = 3;
+
+      const toast = await this.toastCtrl.create({
+        message: '¡Mensaje enviado con éxito!',
+        duration: 2000,
+        color: 'success',
+        position: 'bottom'
+      });
+      await toast.present();
     } else {
-      alert('Por favor, ingresa tu nombre y tu mensaje.');
+      const toast = await this.toastCtrl.create({
+        message: 'Por favor, completa los campos marcados en rojo.',
+        duration: 2000,
+        color: 'danger',
+        position: 'bottom'
+      });
+      await toast.present();
     }
   }
 

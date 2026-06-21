@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
-import { IonApp, IonSplitPane, IonMenu, IonContent, IonList, IonListHeader, IonNote, IonMenuToggle, IonItem, IonIcon, IonLabel, IonRouterOutlet } from '@ionic/angular/standalone';
+import { IonApp, IonSplitPane, IonMenu, IonContent, IonList, IonListHeader, IonNote, IonMenuToggle, IonItem, IonIcon, IonLabel, IonRouterOutlet, IonToggle } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
-import { homeOutline, homeSharp, personOutline, personSharp, mailOutline, mailSharp } from 'ionicons/icons';
+import { homeOutline, homeSharp, personOutline, personSharp, mailOutline, mailSharp, moonOutline, moonSharp } from 'ionicons/icons';
 
 /**
  * Componente Raíz de la aplicación.
@@ -14,7 +14,7 @@ import { homeOutline, homeSharp, personOutline, personSharp, mailOutline, mailSh
   templateUrl: 'app.component.html',
   styleUrls: ['app.component.scss'],
   standalone: true,
-  imports: [RouterLink, RouterLinkActive, IonApp, IonSplitPane, IonMenu, IonContent, IonList, IonListHeader, IonNote, IonMenuToggle, IonItem, IonIcon, IonLabel, IonRouterOutlet],
+  imports: [RouterLink, RouterLinkActive, IonApp, IonSplitPane, IonMenu, IonContent, IonList, IonListHeader, IonNote, IonMenuToggle, IonItem, IonIcon, IonLabel, IonRouterOutlet, IonToggle],
 })
 export class AppComponent {
 
@@ -25,6 +25,10 @@ export class AppComponent {
   ];
 
   constructor() {
-    addIcons({ homeOutline, homeSharp, personOutline, personSharp, mailOutline, mailSharp });
+    addIcons({ homeOutline, homeSharp, personOutline, personSharp, mailOutline, mailSharp, moonOutline, moonSharp });
+  }
+
+  toggleDarkMode(event: any) {
+    document.documentElement.classList.toggle('ion-palette-dark', event.detail.checked);
   }
 }

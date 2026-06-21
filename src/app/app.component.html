@@ -15,6 +15,11 @@
             </ion-item>
           </ion-menu-toggle>
           }
+          <ion-item lines="none" detail="false" style="margin-top: 20px;">
+            <ion-icon aria-hidden="true" slot="start" ios="moon-outline" md="moon-sharp"></ion-icon>
+            <ion-label>Modo Oscuro</ion-label>
+            <ion-toggle slot="end" (ionChange)="toggleDarkMode($event)"></ion-toggle>
+          </ion-item>
         </ion-list>
       </ion-content>
     </ion-menu>

@@ -16,14 +16,14 @@
   </div>
 
   <!-- FORMULARIO DE CONTACTO SIMULADO -->
-  <ion-item>
-    <ion-input label="Nombre" labelPlacement="floating" placeholder="Ingresa tu nombre"
-      [(ngModel)]="nombre"></ion-input>
+  <ion-item lines="none" class="ion-margin-bottom">
+    <ion-input label="Nombre" labelPlacement="floating" fill="outline" placeholder="Ingresa tu nombre"
+      [(ngModel)]="nombre" [color]="nombreError ? 'danger' : 'primary'" (ionInput)="nombreError = false"></ion-input>
   </ion-item>
 
-  <ion-item>
-    <ion-input label="Mensaje" labelPlacement="floating" placeholder="Escribe tu mensaje"
-      [(ngModel)]="mensaje"></ion-input>
+  <ion-item lines="none" class="ion-margin-bottom">
+    <ion-input label="Mensaje" labelPlacement="floating" fill="outline" placeholder="Escribe tu mensaje"
+      [(ngModel)]="mensaje" [color]="mensajeError ? 'danger' : 'primary'" (ionInput)="mensajeError = false"></ion-input>
   </ion-item>
 
   <!-- RANGO DE PRIORIDAD -->
